@@ -78,28 +78,17 @@ function blockMobileBackNavigation() {
 
 function updateOrientationState() {
   const mobile = isMobileDevice();
-  const portrait = window.innerHeight > window.innerWidth;
-
-  document.body.classList.toggle('mobile-portrait', mobile && portrait);
 
   if (prevBtn) {
-    prevBtn.disabled = mobile;
-    prevBtn.style.display = mobile ? 'none' : 'flex';
-    prevBtn.style.pointerEvents = mobile ? 'none' : 'auto';
+    prevBtn.disabled = false;
+    prevBtn.style.display = 'flex';
+    prevBtn.style.pointerEvents = 'auto';
   }
 
   if (mobile) {
     blockMobileBackNavigation();
   } else {
     window.__mobileBackLocked = false;
-  }
-
-  if (mobile && portrait && screen.orientation && typeof screen.orientation.lock === 'function') {
-    try {
-      screen.orientation.lock('landscape');
-    } catch (error) {
-      // Safari / navegadores sin soporte no bloquean la experiencia; muestra el aviso visual.
-    }
   }
 }
 
@@ -290,10 +279,6 @@ nextBtn.addEventListener('click', () => {
 
 // Botón Anterior
 prevBtn.addEventListener('click', () => {
-  if (isMobileDevice()) {
-    return;
-  }
-
   if (currentStep > 1) {
     currentStep--;
     renderStep(currentStep);

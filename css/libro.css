@@ -281,10 +281,9 @@ body.night-mode .counter {
   100% { opacity: 0; transform: translateY(-560px) scale(1.1); }
 }
 
-/* ====================================================
-   OPTIMIZACIÓN MÓVIL PANTALLA COMPLETA (SIN CAJÓN)
-   ==================================================== */
+
 @media (max-width: 768px) {
+
   /* 1. La tarjeta ahora es toda la pantalla del celular */
   .book-container {
     width: 100vw;
@@ -293,39 +292,83 @@ body.night-mode .counter {
     max-height: 100%;
     border-radius: 0;
     box-shadow: none;
-    background: transparent;
+    background: #eaf4f8;
     padding: 15px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
   }
 
-  /* 2. Lirio principal centrado en la mitad superior */
+  /* 2. Lirio principal en el centro del lado derecho */
   .flower-wrapper,
   .flower-wrapper.docked,
   .flower-wrapper.docked-left {
-    top: 28% !important;
-    left: 50% !important;
+    top: 33% !important;
+    left: 75% !important;
     width: 240px !important;
     height: 300px !important;
-    transform: translate(-50%, -50%) scale(0.72) !important;
+    transform: translate(-50%, -50%) scale(0.82) !important;
+    z-index: 2;
+    pointer-events: none;
   }
 
-  /* 3. Poema ubicado en la mitad inferior sin chocar con el lirio */
+  /* En la página nocturna, el lirio cruza de derecha a izquierda. */
+  .book-container.night-mode .flower-wrapper.docked-left {
+    left: 25% !important;
+    top: 43% !important;
+
+    transition: left 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform 1.2s cubic-bezier(0.65, 0, 0.35, 1) !important;
+  }
+
+  /* 3. Contenedor de texto ocupando todo el ancho */
   .content-left,
   .content-right {
-    left: 15px !important;
-    right: 15px !important;
-    top: 56% !important;
-    bottom: auto !important;
-    max-width: calc(100% - 30px) !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-    align-items: center !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 40% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    text-align: left !important;
+    transform: translateY(-50%) !important;
+    z-index: 3;
   }
 
-  .poem-box,
-  .content-right .night-poem {
-    font-size: 1.25rem !important;
-    line-height: 1.35 !important;
-    padding: 0 10px;
+  .book-container.night-mode .content-right {
+    left: auto !important;
+    right: 0 !important;
+    text-align: right !important;
+  }
+
+  .poem-box {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    font-size: 1.8rem !important;
+    line-height: 1.55 !important;
+    padding: 0 !important;
+  }
+
+  /* Silueta para empujar el texto y rodear el lirio orgánicamente */
+  .poem-box::before,
+  .night-poem::before {
+    content: "";
+    float: right;
+    width: 44vw;
+    height: 320px;
+    margin-top: 10px;
+    shape-outside: circle(48% at 75% 50%);
+    -webkit-shape-outside: circle(48% at 75% 50%);
+    shape-margin: 12px;
+    pointer-events: none;
+  }
+
+  .book-container.night-mode .night-poem::before {
+    float: left;
+    shape-outside: circle(48% at 25% 50%);
+    -webkit-shape-outside: circle(48% at 25% 50%);
   }
 
   .poem-footer {
@@ -338,11 +381,15 @@ body.night-mode .counter {
     margin-bottom: 6px !important;
   }
 
-  /* 4. Flechas pegadas a los bordes para no tapar el texto */
+  /* 4. Flechas pegadas a los bordes para no estorbar */
   .nav-arrow {
     width: 40px !important;
     height: 40px !important;
     top: 52% !important;
+    position: absolute !important;
+    z-index: 60 !important;
+    margin-top: 50%;
+
   }
   .nav-arrow.prev { left: 8px !important; }
   .nav-arrow.next { right: 8px !important; }
@@ -355,6 +402,8 @@ body.night-mode .counter {
     text-align: center !important;
     width: max-content;
     padding: 4px 10px !important;
+    z-index: 4;
+    background:transparent;
   }
 
   .timer-title {
@@ -365,19 +414,21 @@ body.night-mode .counter {
     font-size: 0.78rem !important;
   }
 
-  /* 6. Lirios de fondo pequeños bajados para no estorbar el texto */
+  /* 6. Lirios de fondo pequeños bajados */
   .lily {
-    transform: scale(0.45) !important;
+    transform: scale(0.6) !important;
     opacity: 0.55 !important;
   }
-  .lily-1 { bottom: 2% !important; left: -10px !important; }
-  .lily-3 { bottom: 3% !important; left: 25% !important; }
-  .lily-5 { bottom: 2% !important; right: -10px !important; }
+  .lily-1 { bottom:23% !important; left: -10px !important; }
+  .lily-3 { bottom: 25% !important; left: 25% !important; }
+  .lily-5 { bottom: 23% !important; right: -10px !important; }
 
   /* 7. Escenario cósmico adaptado al centro */
   .cosmic-caption {
     top: 15% !important;
-    font-size: 1.35rem !important;
+    font-size: 1.8rem !important;
     width: 92% !important;
   }
+
+
 }
