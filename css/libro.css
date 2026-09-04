@@ -396,7 +396,7 @@ body.night-mode .counter {
 
   /* 5. Contador discreto en la base */
   .bottom-right-timer {
-    bottom: 12px !important;
+    bottom: 13% !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     text-align: center !important;
