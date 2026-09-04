@@ -62,6 +62,20 @@ function isMobileDevice() {
     || (coarsePointer && smallViewport);
 }
 
+function blockMobileBackNavigation() {
+  if (!isMobileDevice() || window.__mobileBackLocked) return;
+
+  window.__mobileBackLocked = true;
+
+  const keepHistory = () => {
+    window.history.pushState(null, '', window.location.href);
+  };
+
+  keepHistory();
+  window.addEventListener('popstate', keepHistory, { passive: true });
+  window.addEventListener('pageshow', keepHistory, { passive: true });
+}
+
 function updateOrientationState() {
   const mobile = isMobileDevice();
   const portrait = window.innerHeight > window.innerWidth;
@@ -74,14 +88,10 @@ function updateOrientationState() {
     prevBtn.style.pointerEvents = mobile ? 'none' : 'auto';
   }
 
-  if (mobile && !window.__mobileBackBlocked) {
-    window.__mobileBackBlocked = true;
-    window.history.pushState(null, '', window.location.href);
-    window.addEventListener('popstate', () => {
-      window.history.pushState(null, '', window.location.href);
-    });
-  } else if (!mobile) {
-    window.__mobileBackBlocked = false;
+  if (mobile) {
+    blockMobileBackNavigation();
+  } else {
+    window.__mobileBackLocked = false;
   }
 
   if (mobile && portrait && screen.orientation && typeof screen.orientation.lock === 'function') {

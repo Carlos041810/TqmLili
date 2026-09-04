@@ -281,18 +281,103 @@ body.night-mode .counter {
   100% { opacity: 0; transform: translateY(-560px) scale(1.1); }
 }
 
+/* ====================================================
+   OPTIMIZACIÓN MÓVIL PANTALLA COMPLETA (SIN CAJÓN)
+   ==================================================== */
 @media (max-width: 768px) {
-  .book-container { padding: 20px; }
-  .content-left, .content-right {
-    left: 20px;
-    right: 20px;
-    top: auto;
-    bottom: 90px;
+  /* 1. La tarjeta ahora es toda la pantalla del celular */
+  .book-container {
+    width: 100vw;
+    height: 100dvh;
     max-width: 100%;
-    text-align: center;
+    max-height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    padding: 15px;
   }
-  .poem-box, .content-right .night-poem { font-size: 1.35rem; }
-  .bottom-right-timer { bottom: 8px; left: 10px; padding: 4px 8px; }
-  .timer-title { font-size: 0.75rem; }
-  .counter { font-size: 0.85rem; }
+
+  /* 2. Lirio principal centrado en la mitad superior */
+  .flower-wrapper,
+  .flower-wrapper.docked,
+  .flower-wrapper.docked-left {
+    top: 28% !important;
+    left: 50% !important;
+    width: 240px !important;
+    height: 300px !important;
+    transform: translate(-50%, -50%) scale(0.72) !important;
+  }
+
+  /* 3. Poema ubicado en la mitad inferior sin chocar con el lirio */
+  .content-left,
+  .content-right {
+    left: 15px !important;
+    right: 15px !important;
+    top: 56% !important;
+    bottom: auto !important;
+    max-width: calc(100% - 30px) !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  .poem-box,
+  .content-right .night-poem {
+    font-size: 1.25rem !important;
+    line-height: 1.35 !important;
+    padding: 0 10px;
+  }
+
+  .poem-footer {
+    font-size: 1.15rem !important;
+    margin-top: 6px !important;
+  }
+
+  .content-right .night-title {
+    font-size: 1.55rem !important;
+    margin-bottom: 6px !important;
+  }
+
+  /* 4. Flechas pegadas a los bordes para no tapar el texto */
+  .nav-arrow {
+    width: 40px !important;
+    height: 40px !important;
+    top: 52% !important;
+  }
+  .nav-arrow.prev { left: 8px !important; }
+  .nav-arrow.next { right: 8px !important; }
+
+  /* 5. Contador discreto en la base */
+  .bottom-right-timer {
+    bottom: 12px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    text-align: center !important;
+    width: max-content;
+    padding: 4px 10px !important;
+  }
+
+  .timer-title {
+    font-size: 0.68rem !important;
+  }
+
+  .counter {
+    font-size: 0.78rem !important;
+  }
+
+  /* 6. Lirios de fondo pequeños bajados para no estorbar el texto */
+  .lily {
+    transform: scale(0.45) !important;
+    opacity: 0.55 !important;
+  }
+  .lily-1 { bottom: 2% !important; left: -10px !important; }
+  .lily-3 { bottom: 3% !important; left: 25% !important; }
+  .lily-5 { bottom: 2% !important; right: -10px !important; }
+
+  /* 7. Escenario cósmico adaptado al centro */
+  .cosmic-caption {
+    top: 15% !important;
+    font-size: 1.35rem !important;
+    width: 92% !important;
+  }
 }
