@@ -133,13 +133,6 @@ envelope.addEventListener('click', () => {
   }, 500);
 });
 
-nextBtn.addEventListener('click', () => {
-  if (currentStep < 7) {
-    currentStep++;
-    renderStep(currentStep);
-  }
-});
-
 // Administrador de la Escena Cósmica
 function renderStep(step) {
   const isProposalStep = step === 7;
@@ -304,7 +297,7 @@ case 5:
 
 // Botón Siguiente
 nextBtn.addEventListener('click', () => {
-  if (currentStep < 6) {
+  if (currentStep < 7) {
     currentStep++;
     renderStep(currentStep);
   }
