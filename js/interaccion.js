@@ -18,6 +18,12 @@ const cosmicSun = document.getElementById('cosmicSun');
 const cosmicGalaxy = document.getElementById('cosmicGalaxy');
 const cosmicLove = document.getElementById('cosmicLove');
 
+const proposalBox = document.getElementById('proposalBox');
+const btnYes = document.getElementById('btnYes');
+const btnNo = document.getElementById('btnNo');
+const proposalCelebration = document.getElementById('proposalCelebration');
+const proposalButtons = document.querySelector('.proposal-buttons');
+
 let currentStep = 1; 
 // 1: Día (Lirio der)
 // 2: Noche (Lirio izq)
@@ -127,8 +133,23 @@ envelope.addEventListener('click', () => {
   }, 500);
 });
 
+nextBtn.addEventListener('click', () => {
+  if (currentStep < 7) {
+    currentStep++;
+    renderStep(currentStep);
+  }
+});
+
 // Administrador de la Escena Cósmica
 function renderStep(step) {
+  const isProposalStep = step === 7;
+  prevBtn.style.display = isProposalStep ? 'none' : 'flex';
+  nextBtn.style.display = isProposalStep ? 'none' : 'flex';
+
+  if (!isProposalStep) {
+    proposalBox.classList.remove('active');
+  }
+
   switch(step) {
     case 1:
       // Restaurar estado de día
@@ -266,6 +287,18 @@ case 5:
         cosmicLove.style.transform = 'translate(-50%, -50%) scale(1.3)';
       }, 350);
       break;
+
+    case 7:
+      // Ocultar elementos celestes previos
+      cosmicGalaxy.style.opacity = '0';
+      cosmicLove.style.opacity = '0';
+      cosmicCaption.style.opacity = '0';
+
+      // Entra la propuesta
+      setTimeout(() => {
+        proposalBox.classList.add('active');
+      }, 400);
+      break;
   }
 }
 
@@ -294,4 +327,27 @@ prevBtn.addEventListener('click', () => {
       contentLeft.classList.remove('visible');
     }, 400);
   }
+});
+
+// El botón "No" se escapa al pasar el cursor o al tocarlo en celular
+function moveNoButton() {
+  const x = (Math.random() - 0.5) * 220;
+  const y = (Math.random() - 0.5) * 160;
+  btnNo.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+btnNo.addEventListener('mouseenter', moveNoButton);
+btnNo.addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  moveNoButton();
+});
+
+// Al dar clic en Sí
+btnYes.addEventListener('click', () => {
+  proposalButtons.style.display = 'none';
+  document.querySelector('.proposal-title').style.display = 'none';
+  proposalCelebration.classList.add('show');
+  
+  // Reactiva los corazones de fondo a toda velocidad como festejo
+  heartsBg.classList.remove('hidden');
 });
