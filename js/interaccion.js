@@ -54,6 +54,33 @@ function setCosmicCaption(text) {
   }, 350);
 }
 
+function isMobileDevice() {
+  const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+  const smallViewport = window.innerWidth <= 920 && window.innerHeight <= 920;
+
+  return /Mobi|Android|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)
+    || (coarsePointer && smallViewport);
+}
+
+function updateOrientationState() {
+  const mobile = isMobileDevice();
+  const portrait = window.innerHeight > window.innerWidth;
+
+  document.body.classList.toggle('mobile-portrait', mobile && portrait);
+
+  if (mobile && portrait && screen.orientation && typeof screen.orientation.lock === 'function') {
+    try {
+      screen.orientation.lock('landscape');
+    } catch (error) {
+      // Safari / navegadores sin soporte no bloquean la experiencia; muestra el aviso visual.
+    }
+  }
+}
+
+window.addEventListener('resize', updateOrientationState);
+window.addEventListener('orientationchange', updateOrientationState);
+updateOrientationState();
+
 // 1. Abrir Sobre
 envelope.addEventListener('click', () => {
   if (typeof startMusic === 'function') startMusic();
