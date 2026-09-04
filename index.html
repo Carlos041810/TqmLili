@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Ti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Montserrat:wght@300;500;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/libro.css">
+  <link rel="stylesheet" href="css/lirio.css">
+  <link rel="stylesheet" href="css/sobre.css">
+  <link rel="stylesheet" href="css/universo.css">
+
+
+</head>
+
+<body>
+
+  <!-- 1. Pantalla del Sobre Decorado -->
+  <div class="envelope-screen" id="envelopeScreen">
+    <div class="envelope-stack" id="envelope">
+      <!-- Tarjeta trasera asomada -->
+      <div class="paper-peek"></div>
+
+      <!-- Sobre ilustrado -->
+      <svg class="envelope-svg-box" viewBox="0 0 480 310" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="pearlShine" cx="35%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="45%" stop-color="#f3ede7" />
+            <stop offset="100%" stop-color="#cfc4b8" />
+          </radialGradient>
+
+          <linearGradient id="heartRed" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#d62226" />
+            <stop offset="100%" stop-color="#990b11" />
+          </linearGradient>
+
+          <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.25" />
+          </filter>
+
+          <g id="goldBranch">
+            <path d="M 0,0 Q 30,-5 65,-25" fill="none" stroke="#f6dc9c" stroke-width="2.5" stroke-linecap="round" />
+            <ellipse cx="20" cy="-6" rx="7" ry="3.5" transform="rotate(-25 20 -6)" fill="#f6dc9c" />
+            <ellipse cx="38" cy="-12" rx="7" ry="3.5" transform="rotate(-40 38 -12)" fill="#f6dc9c" />
+            <ellipse cx="54" cy="-21" rx="6.5" ry="3" transform="rotate(-55 54 -21)" fill="#f6dc9c" />
+            <ellipse cx="66" cy="-28" rx="6" ry="3" transform="rotate(-65 66 -28)" fill="#f6dc9c" />
+          </g>
+        </defs>
+
+        <rect x="15" y="10" width="450" height="290" rx="14" fill="#e5983b" />
+        <rect x="19" y="14" width="442" height="282" rx="11" fill="#ea6f66" stroke="#f2ca52" stroke-width="3"
+          stroke-dasharray="10,6" />
+
+        <use href="#goldBranch" x="40" y="80" transform="rotate(35 40 80)" />
+        <use href="#goldBranch" x="440" y="80" transform="scale(-1, 1) translate(-480, 0) rotate(35 40 80)" />
+        <use href="#goldBranch" x="65" y="240" transform="rotate(-20 65 240)" />
+        <use href="#goldBranch" x="415" y="240" transform="scale(-1, 1) translate(-480, 0) rotate(-20 65 240)" />
+
+        <polygon points="19,296 240,165 461,296" fill="#df635a" stroke="#d54e45" stroke-width="1.5" />
+
+        <g class="svg-top-flap">
+          <path d="M 19,14 Q 240,165 461,14" fill="#eb736b" stroke="#f2ca52" stroke-width="3" stroke-dasharray="9,5" />
+          <polygon points="19,14 240,165 461,14" fill="#ea6f66" opacity="0.95" />
+        </g>
+
+        <g class="heart-seal-btn" filter="url(#softShadow)">
+          <path
+            d="M 240,135 C 240,118 214,105 198,124 C 182,143 192,175 240,205 C 288,175 298,143 282,124 C 266,105 240,118 240,135 Z"
+            fill="#7a050a" />
+          <path
+            d="M 240,140 C 240,125 218,114 205,130 C 192,146 200,172 240,198 C 280,172 288,146 275,130 C 262,114 240,125 240,140 Z"
+            fill="url(#heartRed)" />
+
+          <g fill="#fbeee0">
+            <path
+              d="M 226,155 C 230,152 235,155 237,159 C 232,160 228,162 224,166 C 224,163 222,160 219,159 C 222,157 225,156 226,155 Z" />
+            <path
+              d="M 254,155 C 250,152 245,155 243,159 C 248,160 252,162 256,166 C 256,163 258,160 261,159 C 258,157 255,156 254,155 Z" />
+          </g>
+        </g>
+
+        <g class="pearl-pin">
+          <circle cx="205" cy="45" r="18" fill="url(#pearlShine)" />
+          <ellipse cx="199" cy="38" rx="6" ry="3" fill="#ffffff" opacity="0.8" transform="rotate(-20 199 38)" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="envelope-instruction">Toque en el centro para abrir, por favor.</div>
+  </div>
+
+  <div class="book-container" id="bookContainer">
+
+    <button class="nav-arrow prev" id="prevBtn" title="Anterior">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+
+    <button class="nav-arrow next" id="nextBtn" title="Siguiente">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+
+    <div class="hearts-bg" aria-hidden="true">
+      <span class="heart" style="left:6%; --dur:7s; --size:28px; --delay:-3s"></span>
+      <span class="heart" style="left:14%; --dur:6s; --size:20px; --delay:-1.5s"></span>
+      <span class="heart" style="left:22%; --dur:5.5s; --size:24px; --delay:-2.2s"></span>
+      <span class="heart" style="left:30%; --dur:8s; --size:18px; --delay:-4s"></span>
+      <span class="heart" style="left:40%; --dur:6.2s; --size:30px; --delay:-2.8s"></span>
+      <span class="heart" style="left:50%; --dur:7.5s; --size:22px; --delay:-3.6s"></span>
+      <span class="heart" style="left:62%; --dur:6.8s; --size:26px; --delay:-1.2s"></span>
+      <span class="heart" style="left:74%; --dur:5.8s; --size:19px; --delay:-2.6s"></span>
+      <span class="heart" style="left:86%; --dur:7.2s; --size:32px; --delay:-3.1s"></span>
+    </div>
+
+    <div class="night-stars" aria-hidden="true">
+      <span class="star star-1"></span>
+      <span class="star star-2"></span>
+      <span class="star star-3"></span>
+      <span class="star star-4"></span>
+    </div>
+
+    <div class="lily-field" aria-hidden="true">
+      <div class="lily lily-1">
+        <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M70 164 Q72 108 70 52" fill="none" stroke="#607d3b" stroke-width="4" stroke-linecap="round" />
+          <path d="M70 90 C 44 82, 25 66, 18 38 C 36 49, 55 62, 70 74 Z" fill="#597346" />
+          <path d="M70 90 C 96 82, 115 66, 122 38 C 104 49, 85 62, 70 74 Z" fill="#6d8c4d" />
+          <path d="M70 68 C 52 44, 52 18, 70 10 C 88 18, 88 44, 70 68 Z" fill="#9ad0ec" />
+          <path d="M70 68 C 47 74, 30 90, 35 112 C 50 101, 58 89, 70 74 Z" fill="#75b7d6" />
+          <path d="M70 68 C 93 74, 110 90, 105 112 C 90 101, 82 89, 70 74 Z" fill="#75b7d6" />
+          <circle cx="70" cy="53" r="4" fill="#f9d58b" />
+        </svg>
+      </div>
+
+      <div class="moon-dot" aria-hidden="true"></div>
+
+
+
+      <div class="lily lily-3">
+        <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M70 164 Q72 108 70 52" fill="none" stroke="#607d3b" stroke-width="4" stroke-linecap="round" />
+          <path d="M70 90 C 44 82, 25 66, 18 38 C 36 49, 55 62, 70 74 Z" fill="#597346" />
+          <path d="M70 90 C 96 82, 115 66, 122 38 C 104 49, 85 62, 70 74 Z" fill="#6d8c4d" />
+          <path d="M70 68 C 52 44, 52 18, 70 10 C 88 18, 88 44, 70 68 Z" fill="#b7d7f6" />
+          <path d="M70 68 C 47 74, 30 90, 35 112 C 50 101, 58 89, 70 74 Z" fill="#8ecae6" />
+          <path d="M70 68 C 93 74, 110 90, 105 112 C 90 101, 82 89, 70 74 Z" fill="#8ecae6" />
+          <circle cx="70" cy="53" r="4" fill="#f9d58b" />
+        </svg>
+      </div>
+
+
+
+      <div class="lily lily-5">
+        <svg viewBox="0 0 140 180" xmlns="http://www.w3.org/2000/svg">
+          <path d="M70 164 Q72 108 70 52" fill="none" stroke="#607d3b" stroke-width="4" stroke-linecap="round" />
+          <path d="M70 90 C 44 82, 25 66, 18 38 C 36 49, 55 62, 70 74 Z" fill="#597346" />
+          <path d="M70 90 C 96 82, 115 66, 122 38 C 104 49, 85 62, 70 74 Z" fill="#6d8c4d" />
+          <path d="M70 68 C 52 44, 52 18, 70 10 C 88 18, 88 44, 70 68 Z" fill="#afd8ff" />
+          <path d="M70 68 C 47 74, 30 90, 35 112 C 50 101, 58 89, 70 74 Z" fill="#8ab9d9" />
+          <path d="M70 68 C 93 74, 110 90, 105 112 C 90 101, 82 89, 70 74 Z" fill="#8ab9d9" />
+          <circle cx="70" cy="53" r="4" fill="#f9d58b" />
+        </svg>
+      </div>
+    </div>
+
+    <div class="content-left" id="contentLeft">
+      <div class="poem-box" id="poemBox">
+        "Estoy agradecido con Dios porque, a pesar de la distancia que nos separa, unió nuestros caminos y me permitió
+        conocer a la niña más increíble y guapa de este pequeño universo."
+      </div>
+      <div class="poem-footer" id="poemFooter">Gracias por estar en mi vida</div>
+    </div>
+
+    <div class="content-right" id="contentRight">
+      <div class="night-title" id="nightTitle">Bajo el mismo cielo...</div>
+      <div class="night-poem" id="nightPoem">
+        "Aunque caiga la noche y los kilómetros sigan ahí, cada estrella me recuerda que compartimos el mismo latido y
+        que pronto nos veremos."
+      </div>
+    </div>
+
+    <div class="flower-wrapper" id="flowerWrapper">
+      <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="bluePetalDeep" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#0f2b48" />
+            <stop offset="60%" stop-color="#1b4965" />
+            <stop offset="100%" stop-color="#468faf" />
+          </linearGradient>
+          <linearGradient id="bluePetalLight" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#1b4965" />
+            <stop offset="60%" stop-color="#61a5c2" />
+            <stop offset="100%" stop-color="#a9d6e5" />
+          </linearGradient>
+          <linearGradient id="stemGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#283618" />
+            <stop offset="100%" stop-color="#606c38" />
+          </linearGradient>
+        </defs>
+        <path class="stem" d="M 200 480 Q 195 340 200 220" fill="none" stroke="url(#stemGradient)" stroke-width="7"
+          stroke-linecap="round" />
+        <path class="leaf leaf-1" d="M 197 380 C 140 370 120 330 110 300 C 135 320 170 340 198 350 Z" fill="#47582b" />
+        <path class="leaf leaf-2" d="M 199 340 C 250 330 280 290 290 260 C 265 285 230 305 198 320 Z" fill="#556b2f" />
+        <path class="petal petal-back-1" d="M 200 220 C 130 190 100 110 130 70 C 160 110 185 170 200 220 Z"
+          fill="url(#bluePetalDeep)" />
+        <path class="petal petal-back-2" d="M 200 220 C 270 190 300 110 270 70 C 240 110 215 170 200 220 Z"
+          fill="url(#bluePetalDeep)" />
+        <path class="petal petal-main-1" d="M 200 220 C 160 150 170 70 200 40 C 230 70 240 150 200 220 Z"
+          fill="url(#bluePetalLight)" />
+        <path class="petal petal-main-2" d="M 200 220 C 140 220 90 250 80 210 C 110 180 160 190 200 220 Z"
+          fill="url(#bluePetalLight)" />
+        <path class="petal petal-main-3" d="M 200 220 C 260 220 310 250 320 210 C 290 180 240 190 200 220 Z"
+          fill="url(#bluePetalLight)" />
+        <path class="stamen" d="M 200 220 Q 185 170 175 140" fill="none" stroke="#d8f3dc" stroke-width="2.5"
+          stroke-linecap="round" />
+        <path class="stamen" d="M 200 220 Q 200 160 200 130" fill="none" stroke="#d8f3dc" stroke-width="2.5"
+          stroke-linecap="round" />
+        <path class="stamen" d="M 200 220 Q 215 170 225 140" fill="none" stroke="#d8f3dc" stroke-width="2.5"
+          stroke-linecap="round" />
+        <circle class="anther" cx="175" cy="140" r="4.5" fill="#f4a261" />
+        <circle class="anther" cx="200" cy="130" r="4.5" fill="#f4a261" />
+        <circle class="anther" cx="225" cy="140" r="4.5" fill="#f4a261" />
+      </svg>
+    </div>
+
+    <div class="bottom-right-timer">
+      <div class="timer-title">Mi amor por ti comenzó hace...</div>
+      <div class="counter" id="timer">Calculando...</div>
+    </div>
+    <!-- Escenario Cósmico: Comparativa de Tamaños -->
+    <div class="universe-stage" id="universeStage">
+      <!-- Textos de narración de cada escala -->
+      <div class="cosmic-caption" id="cosmicCaption"></div>
+
+      <!-- 1. Ramo de lirios compacto -->
+      <div class="cosmic-item bouquet-item" id="cosmicBouquet">
+        <svg viewBox="0 0 120 160">
+          <path d="M 60 150 L 52 100 M 60 150 L 60 95 M 60 150 L 68 100" stroke="#4a682f" stroke-width="4" stroke-linecap="round"/>
+          <ellipse cx="60" cy="120" rx="14" ry="5" fill="#d4a373" opacity="0.9"/>
+          <circle cx="46" cy="85" r="14" fill="#61a5c2"/>
+          <circle cx="46" cy="85" r="8" fill="#1b4965"/>
+          <circle cx="60" cy="70" r="16" fill="#8ecae6"/>
+          <circle cx="60" cy="70" r="9" fill="#219ebc"/>
+          <circle cx="74" cy="85" r="14" fill="#61a5c2"/>
+          <circle cx="74" cy="85" r="8" fill="#1b4965"/>
+        </svg>
+      </div>
+
+      <!-- 2. La Luna -->
+      <div class="cosmic-item moon-item" id="cosmicMoon"></div>
+
+      <!-- 3. El Sol colosal -->
+      <div class="cosmic-item sun-item" id="cosmicSun"></div>
+
+      <!-- 4. La Galaxia en espiral -->
+      <div class="cosmic-item galaxy-item" id="cosmicGalaxy">
+        <div class="galaxy-core"></div>
+        <div class="galaxy-arms"></div>
+      </div>
+
+      <!-- 5. Corazón final (Amor infinito) -->
+      <div class="cosmic-item love-item" id="cosmicLove">
+        <div class="love-pulse-glow"></div>
+        <svg viewBox="0 0 32 32" class="cosmic-heart-svg">
+          <path d="M16 28.5 C16 28.5 3 20.5 3 11.5 C3 6.5 7 2.5 12 2.5 C14.5 2.5 15.5 4 16 5 C16.5 4 17.5 2.5 20 2.5 C25 2.5 29 6.5 29 11.5 C29 20.5 16 28.5 16 28.5 Z" fill="#ff2a6d"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Elemento de Audio (puedes cambiar el link por tu archivo local 'musica.mp3') -->
+  <audio id="bgMusic"
+    src="musica/Ludovico Einaudi - Experience (Official Solo Piano Performance Video) - Ludovico Einaudi.mp3"
+    preload="auto" loop></audio>
+
+  <!-- Botón flotante para pausar / reanudar -->
+  <button id="musicToggle" class="music-btn" title="Pausar/Reproducir música">
+    <span class="music-icon">🎵</span>
+  </button>
+
+  <script src="js/contador.js"></script>
+  <script src="js/interaccion.js"></script>
+  <script src="js/musica.js"></script>
+</body>
+
+</html>

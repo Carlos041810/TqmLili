@@ -1,0 +1,298 @@
+.book-container {
+  width: 90vw;
+  max-width: 950px;
+  height: 85vh;
+  max-height: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.94);
+  visibility: hidden;
+  transition: background-color 1.2s ease, box-shadow 1.2s ease, opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+  background: #eaf4f8;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.book-container.visible {
+  opacity: 1;
+  transform: scale(1);
+  visibility: visible;
+}
+
+.book-container.night-mode {
+  background: linear-gradient(160deg, #10192e 0%, #0d1b2a 100%);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.moon-dot {
+  position: absolute;
+  top: 24px;
+  right: 90px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f4e8b8;
+  box-shadow: 0 0 18px rgba(244, 232, 184, 0.8), 0 0 34px rgba(244, 232, 184, 0.35);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  z-index: 8;
+}
+
+.night-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.star {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.star-1 { top: 58px; left: 23%; }
+.star-2 { top: 86px; left: 55%; }
+.star-3 { top: 48px; right: 27%; }
+.star-4 { top: 120px; left: 42%; }
+
+body.night-mode .moon-dot,
+.book-container.night-mode .moon-dot,
+body.night-mode .star,
+.book-container.night-mode .star {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Flechas de navegación */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 60;
+  transition: background 0.2s, transform 0.2s;
+  color: #1b4965;
+}
+
+.nav-arrow:hover {
+  background: #f0f7fa;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.nav-arrow.prev { left: 15px; }
+.nav-arrow.next { right: 15px; }
+
+body.night-mode .nav-arrow {
+  background: #1e293b;
+  color: #a9d6e5;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Texto 1 (Lado Izquierdo) */
+.content-left {
+  position: absolute;
+  left: 55px;
+  top: 45px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.content-left.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.poem-box {
+  font-family: 'Caveat', cursive;
+  font-size: 1.8rem;
+  line-height: 1.4;
+  color: #2b2d42;
+}
+
+.poem-footer {
+  margin-top: 12px;
+  font-family: 'Caveat', cursive;
+  font-size: 1.5rem;
+  color: #2b2d42;
+  visibility: hidden;
+}
+
+/* Animación palabra por palabra */
+.poem-box .word,
+.poem-footer .word,
+.night-poem .word {
+  opacity: 0;
+  display: inline-block;
+  transform: translateY(6px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  white-space: pre-wrap;
+}
+
+.poem-box .word.show,
+.poem-footer .word.show,
+.night-poem .word.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Texto 2 (Lado Derecho para el modo noche) */
+.content-right {
+  position: absolute;
+  right: 55px;
+  top: 50px;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+body.night-mode .content-right,
+.book-container.night-mode .content-right {
+  top: 120px;
+}
+
+.content-right.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.content-right .night-title {
+  font-family: 'Caveat', cursive;
+  font-size: 2.3rem;
+  color: #a9d6e5;
+  text-shadow: 0 0 12px rgba(169, 214, 229, 0.35);
+  margin-bottom: 12px;
+}
+
+.content-right .night-poem {
+  font-family: 'Caveat', cursive;
+  font-size: 1.75rem;
+  line-height: 1.45;
+  color: #e0e1dd;
+}
+
+/* Contador en esquina inferior izquierda */
+.bottom-right-timer {
+  position: absolute;
+  bottom: 15px;
+  left: 25px;
+  text-align: left;
+  z-index: 25;
+  background: #eaf4f8;
+  backdrop-filter: blur(4px);
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background 0.8s ease, color 0.8s ease;
+}
+
+body.night-mode .bottom-right-timer {
+  background: rgba(16, 25, 46, 0.75);
+}
+
+.timer-title {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #7b8ca3;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.counter {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1b4965;
+  font-variant-numeric: tabular-nums;
+}
+
+body.night-mode .counter {
+  color: #a9d6e5;
+}
+
+/* Fondo de Corazones Flotantes */
+.hearts-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.hearts-bg.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.heart {
+  position: absolute;
+  bottom: -40px;
+  left: var(--left, 50%);
+  width: var(--size, 24px);
+  height: var(--size, 24px);
+  background-color: #ff4081;
+  clip-path: path("M12 4.419C1.676-2.023-3.327 7.025 2.5 13.98 7.324 19.742 12 23 12 23s4.676-3.258 9.5-9.02c5.827-6.955.824-16.003-9.5-9.561z");
+  transform-origin: center center;
+  transform: scale(calc(var(--size, 24px) / 24px));
+  opacity: 0;
+  filter: drop-shadow(0 0 10px rgba(255, 64, 129, 0.85));
+  animation: floatHeart var(--dur, 6s) infinite ease-in-out;
+  animation-delay: var(--delay, 0s);
+}
+
+@keyframes floatHeart {
+  0% { opacity: 0; transform: translateY(0) scale(0.6); }
+  20% { opacity: 0.75; }
+  80% { opacity: 0.65; }
+  100% { opacity: 0; transform: translateY(-560px) scale(1.1); }
+}
+
+@media (max-width: 768px) {
+  .book-container { padding: 20px; }
+  .content-left, .content-right {
+    left: 20px;
+    right: 20px;
+    top: auto;
+    bottom: 90px;
+    max-width: 100%;
+    text-align: center;
+  }
+  .poem-box, .content-right .night-poem { font-size: 1.35rem; }
+  .bottom-right-timer { bottom: 8px; left: 10px; padding: 4px 8px; }
+  .timer-title { font-size: 0.75rem; }
+  .counter { font-size: 0.85rem; }
+}
