@@ -1,4 +1,4 @@
-// Fecha de inicio (16 de julio de 2026 12:41, hora El Salvador UTC-6)
+// Fecha de inicio16  de julio de 2026 12:41, hora El Salvador 
 const startDate = new Date('2026-07-16T12:41:00-06:00');
 
 function updateCounter() {

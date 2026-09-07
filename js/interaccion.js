@@ -18,11 +18,7 @@ const cosmicSun = document.getElementById('cosmicSun');
 const cosmicGalaxy = document.getElementById('cosmicGalaxy');
 const cosmicLove = document.getElementById('cosmicLove');
 
-const proposalBox = document.getElementById('proposalBox');
-const btnYes = document.getElementById('btnYes');
-const btnNo = document.getElementById('btnNo');
-const proposalCelebration = document.getElementById('proposalCelebration');
-const proposalButtons = document.querySelector('.proposal-buttons');
+const finalMessage = document.getElementById('finalMessage');
 
 let currentStep = 1; 
 // 1: Día (Lirio der)
@@ -30,7 +26,7 @@ let currentStep = 1;
 // 3: Ramo vs Luna
 // 4: Luna vs Sol
 // 5: Sol vs Galaxia
-// 6: Amor infinito
+// 6: Ultima comparacion
 
 function animateWords(container, delay = 240) {
   if (!container) return;
@@ -135,13 +131,10 @@ envelope.addEventListener('click', () => {
 
 // Administrador de la Escena Cósmica
 function renderStep(step) {
-  const isProposalStep = step === 7;
-  prevBtn.style.display = isProposalStep ? 'none' : 'flex';
-  nextBtn.style.display = isProposalStep ? 'none' : 'flex';
-
-  if (!isProposalStep) {
-    proposalBox.classList.remove('active');
-  }
+  const isFinalStep = step === 7;
+  prevBtn.style.display = 'flex';
+  nextBtn.style.display = isFinalStep ? 'none' : 'flex';
+  finalMessage.classList.toggle('active', isFinalStep);
 
   switch(step) {
     case 1:
@@ -282,15 +275,13 @@ case 5:
       break;
 
     case 7:
-      // Ocultar elementos celestes previos
+      // Mostrar la hoja final y ocultar los elementos anteriores
       cosmicGalaxy.style.opacity = '0';
       cosmicLove.style.opacity = '0';
       cosmicCaption.style.opacity = '0';
-
-      // Entra la propuesta
-      setTimeout(() => {
-        proposalBox.classList.add('active');
-      }, 400);
+      cosmicBouquet.style.opacity = '0';
+      cosmicMoon.style.opacity = '0';
+      cosmicSun.style.opacity = '0';
       break;
   }
 }
@@ -320,27 +311,4 @@ prevBtn.addEventListener('click', () => {
       contentLeft.classList.remove('visible');
     }, 400);
   }
-});
-
-// El botón "No" se escapa al pasar el cursor o al tocarlo en celular
-function moveNoButton() {
-  const x = (Math.random() - 0.5) * 220;
-  const y = (Math.random() - 0.5) * 160;
-  btnNo.style.transform = `translate(${x}px, ${y}px)`;
-}
-
-btnNo.addEventListener('mouseenter', moveNoButton);
-btnNo.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  moveNoButton();
-});
-
-// Al dar clic en Sí
-btnYes.addEventListener('click', () => {
-  proposalButtons.style.display = 'none';
-  document.querySelector('.proposal-title').style.display = 'none';
-  proposalCelebration.classList.add('show');
-  
-  // Reactiva los corazones de fondo a toda velocidad como festejo
-  heartsBg.classList.remove('hidden');
 });
